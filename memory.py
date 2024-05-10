@@ -19,7 +19,7 @@ tiles = list(range(32)) * 2
 state = {'mark': None}
 hide = [True] * 64
 writer = Turtle(visible=False)
-state2 = {'taps': 0}
+state2 = {'taps': 0, "discovered": 0}
 
 
 def square(x, y):
@@ -54,6 +54,7 @@ def tap(x, y):
     if mark is None or mark == spot or tiles[mark] != tiles[spot]:
         state['mark'] = spot
     else:
+        state2["discovered"] += 1
         hide[spot] = False
         hide[mark] = False
         state['mark'] = None
@@ -83,6 +84,11 @@ def draw():
     writer.goto(160, 160)
     writer.color('blue')
     writer.write(state2['taps'], font=('Arial', 12, 'normal'))
+    if state2["discovered"] == len(tiles)/2:
+        print("FIN DEL JUEGO LOL")
+        print("NÚMERO DE TAPS:", state2["taps"])
+        return
+    
     update()
     ontimer(draw, 100)
 
