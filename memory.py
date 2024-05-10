@@ -18,6 +18,8 @@ car = path('car.gif')
 tiles = list(range(32)) * 2
 state = {'mark': None}
 hide = [True] * 64
+writer = Turtle(visible=False)
+state2 = {'taps': 0}
 
 
 def square(x, y):
@@ -45,6 +47,7 @@ def xy(count):
 
 def tap(x, y):
     """Update mark and hidden tiles based on tap."""
+    state2['taps'] += 1
     spot = index(x, y)
     mark = state['mark']
 
@@ -77,6 +80,9 @@ def draw():
         color('black')
         write(tiles[mark], font=('Arial', 30, 'normal'))
 
+    writer.goto(160, 160)
+    writer.color('blue')
+    writer.write(state2['taps'], font=('Arial', 12, 'normal'))
     update()
     ontimer(draw, 100)
 
