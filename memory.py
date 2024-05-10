@@ -72,10 +72,16 @@ def draw():
 
     if mark is not None and hide[mark]:
         x, y = xy(mark)
-        up()
-        goto(x + 2, y)
-        color('black')
-        write(tiles[mark], font=('Arial', 30, 'normal'))
+        if (tiles[mark]<10):
+            up()
+            goto(x + 15, y)
+            color('black')
+            write(tiles[mark], font=('Arial', 30, 'normal'))
+        else:
+            up()
+            goto(x + 4, y)
+            color('black')
+            write(tiles[mark], font=('Arial', 30, 'normal'))
 
     update()
     ontimer(draw, 100)
